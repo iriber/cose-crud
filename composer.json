@@ -8,9 +8,11 @@
     "authors": [
         {"name": "Bernardo Iribarne", "email": "ber.iribarne@gmail.com"}
     ],
+    "require": {
+        "codnet/cose": "dev-master"
+    },
     "autoload": {
         "psr-0": { 
-        	"Cose\\Crud": "src/main/php",
-        	"Cose": "/var/www/codnet_fmk" }
+        	"Cose\\Crud": "src/main/php" }
     }
 }
