@@ -1,10 +1,10 @@
 {
-    "name": "cose/crud",
+    "name": "codnet/cose-crud",
     "type": "library","version":"1.0.0",
     "description": "CRUD for Codnet Services for PHP",
-    "keywords": ["services"],
+    "keywords": ["php", "framework", "services", "crud", "doctrine", "codnet"],
     "homepage": "http://www.codnet.com.ar",
-    "license": "MIT",
+    "license": "GPL v2",
     "authors": [
         {"name": "Bernardo Iribarne", "email": "ber.iribarne@gmail.com"}
     ],
