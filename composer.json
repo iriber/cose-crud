@@ -1,0 +1,16 @@
+{
+    "name": "cose/crud",
+    "type": "library","version":"1.0.0",
+    "description": "CRUD for Codnet Services for PHP",
+    "keywords": ["services"],
+    "homepage": "http://www.codnet.com.ar",
+    "license": "MIT",
+    "authors": [
+        {"name": "Bernardo Iribarne", "email": "ber.iribarne@gmail.com"}
+    ],
+    "autoload": {
+        "psr-0": { 
+        	"Cose\\Crud": "src/main/php",
+        	"Cose": "/var/www/codnet_fmk" }
+    }
+}
