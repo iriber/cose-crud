@@ -13,6 +13,7 @@ use Cose\service\impl\Service,
 use	Cose\Crud\service\ICrudService;
 
 use Cose\Security\service\SecurityContext;
+use Cose\Security\exception\AuthorizationException;
 
 /**
  * Servicio genérico crud.
@@ -22,6 +23,14 @@ use Cose\Security\service\SecurityContext;
  */
 abstract class CrudService extends Service implements ICrudService{
 
+	protected function authorize($method){
+		
+		if( ! SecurityContext::getInstance()->authorize( $this, $method ) )
+			throw new AuthorizationException($method);
+		
+	}
+	
+			
 	abstract function validateOnAdd( $entity );
 	
 	abstract function validateOnUpdate( $entity );
@@ -35,6 +44,8 @@ abstract class CrudService extends Service implements ICrudService{
 	public function add($entity){
 
 		try {
+			
+			$this->authorize( __FUNCTION__ );
 			
 			$this->validateOnAdd( $entity );
 			
@@ -59,6 +70,8 @@ abstract class CrudService extends Service implements ICrudService{
 	public function update($entity){
 
 		try {
+			
+			$this->authorize( __FUNCTION__ );
 			
 			$this->validateOnUpdate( $entity );
 			
@@ -85,6 +98,8 @@ abstract class CrudService extends Service implements ICrudService{
 		
 		try {
 			
+			$this->authorize( __FUNCTION__ );
+			
 			$this->validateOnDelete( $oid );
 			
 			//se elimina la entity.
@@ -109,6 +124,8 @@ abstract class CrudService extends Service implements ICrudService{
 
 		try {
 
+			$this->authorize( __FUNCTION__ );
+			
 			//obtenemos la entity.
 			$entity = $this->getDAO()->get( $oid );
 			
@@ -133,10 +150,8 @@ abstract class CrudService extends Service implements ICrudService{
 	public function getList($criteria){
 
 			try {
-				$service = get_class($this) . "::" . __FUNCTION__;
-				$service = $this;
 				
-				//SecurityContext::getInstance()->authorize( $this, __FUNCTION__ );
+				$this->authorize( __FUNCTION__ );
 								
 				//obtenemos las entities.
 				$entities = $this->getDAO()->getList( $criteria );
@@ -165,10 +180,9 @@ abstract class CrudService extends Service implements ICrudService{
 	public function getSingleResult( $criteria ){
 
 			try {
-				$service = get_class($this) . "::" . __FUNCTION__;
-				$service = $this;
-				//SecurityContext::getInstance()->authorize( $this, __FUNCTION__ );
-								
+				
+				$this->authorize( __FUNCTION__ );
+				
 				//obtenemos la entity.
 				$entity = $this->getDAO()->getSingleResult( $criteria );
 				
@@ -205,10 +219,9 @@ abstract class CrudService extends Service implements ICrudService{
 	public function getCount($criteria){
 
 			try {
-				$service = get_class($this) . "::" . __FUNCTION__;
-				$service = $this;
-				//SecurityContext::getInstance()->authorize( $this, __FUNCTION__ );
-								
+				
+				$this->authorize( __FUNCTION__ );
+				
 				//obtenemos las entities.
 				$count = $this->getDAO()->getCount( $criteria );
 				
