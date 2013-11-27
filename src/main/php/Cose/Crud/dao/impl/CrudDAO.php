@@ -207,4 +207,31 @@ abstract class CrudDAO extends DoctrineDAO implements ICrudDAO{
 		}
 		
 	}
+	
+	/**
+	 * (non-PHPdoc)
+	 * @see \Cose\Crud\dao\ICrudDAO::addEntities()
+	 */
+	function addEntities( $entities, $batchSize=1000 ){
+		
+		$index = 0;
+		
+		foreach ($entities as $entity) {
+			
+			$index++;			
+			
+			$this->entityManager->persist($entity);
+			
+			if (($index % $batchSize) == 0) {
+				$this->entityManager->flush();
+				$this->entityManager->clear();
+			}
+		}	
+		
+		if (($index % $batchSize) != 0) {
+			$this->entityManager->flush();
+			$this->entityManager->clear();
+		}
+		
+	}
 }

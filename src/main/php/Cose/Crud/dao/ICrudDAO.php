@@ -64,5 +64,11 @@ interface ICrudDAO {
 	 * @throws DAOException
 	 */
 	function getSingleResult( $criteria );
-	
+
+	/**
+	 * agrega varias entities en modo batch
+	 * @param array $entities
+	 * @param integer $batchSize
+	 */
+	function addEntities( $entities, $batchSize=1000 );
 }
